@@ -1,6 +1,6 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: tofucurd Blog
+SEOTitle: 菜 | tofucurd Blog
 header-img: img/home-bg.jpg
 email: huxpro@gmail.com
 description: "关于程序与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
@@ -13,10 +13,10 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+# weibo_username:     huxpro
+# zhihu_username:     huxpro
+github_username:    tofucurd
+# twitter_username:   huxpro
 #facebook_username:  huxpro
 #linkedin_username:  firstname-lastname-idxxxx
 
@@ -59,7 +59,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+# disqus_username: hux
 
 # Netease settings
 netease_comment: false
@@ -71,15 +71,15 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+# ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+# ga_domain: huangxuan.me
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "黄玄，前端娱乐圈 NPC，编程语言/编译器初心者 <br> An UI/Frontend dev & designer accidentally growing into a compiler/PL hacker."
-sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "向大佬们问好"
+# sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -103,31 +103,7 @@ page-mathjax: false
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序（Midare）",
-        href: "http://mida.re/"
-    },{
-        title: "Sherry Woo",
-        href: "https://sherrywoo.me/"
-    },{
-        title: "Kun Qian",
-        href: "http://kunq.me"
-    },{
-        title: "Ebn Zhang",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "JiyinYiyong",
-        href: "http://tiye.me/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
+        title: "kk",
+        href: "https://dreamerkk.github.io"
     }
 ]
