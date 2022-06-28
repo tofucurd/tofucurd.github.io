@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "解决GitHub Page无法显示markdown数学公式的问题"
+title:      "解决GitHub Pages无法显示markdown数学公式的问题"
 date:       2022-6-28
 author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
