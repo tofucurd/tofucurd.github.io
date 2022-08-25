@@ -7,14 +7,14 @@ author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true
 mathjax: true
-tags: [macOS, 教程, vscode]
+tags: [macOS, 教程, vscode, clang]
 ---
 
 #### 注：本文教程适用Apple Silicon和Intel的Mac
 
 # 关于调试
 
-由于本人比较菜，所以没有成功配置M1下的vscode调试配置文件，所以本文采用插件Code Runner。关于怎么调试，作为OIer，当然是printf大法好！ 
+自古以来，调试都有两种方法，一种是使用调试工具，一种是printf大法，本文两种方法都会有。
 
 # step 1 安装command line tools
 
@@ -191,6 +191,10 @@ tags: [macOS, 教程, vscode]
 
 # step 3 vscode配置
 
+下面提供两种方法，两种方法均可用于Apple Silicon和Intel的Mac，**且两种方法互不干扰**。
+
+# step 3.1 Code Runner+printf版
+
 先安装必要插件：
 
 - C/C++
@@ -269,10 +273,88 @@ tags: [macOS, 教程, vscode]
 
 保存即可。
 
+## part 4 printf调试指南/技巧
+
 写好一份代码后按快捷键``control+option+N``即可运行，注意必须要保存后的代码才有vscode的自动提示和自动补全。
 
-## part 4 插件推荐
+### [使用Sanitizer](./2022-8-25-OI%E4%B8%ADSanitizer%E7%9A%84%E7%94%A8%E9%80%94)（强烈推荐）
 
-#### One Dark Pro
+# step 3.2 vscode内置调试版
 
-挺好的一个主题插件。
+先安装必要插件：
+
+- C/C++
+
+- CodeLLDB（为Mac提供本地调试兼容性支持）
+
+## part 1
+
+同step 3.1 part 1
+
+## part 2
+
+同step 3.2 part 2
+
+## part 3 编译支持
+
+在``c_cpp_properties.json``所在的``.vscode``目录下新建``task.json``，并将一下代码复制进去：
+
+```json
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Clang",// 只是一个label，可以更改名字
+            "type": "shell",
+            "command": "clang++",
+            "args": [//编译选项可以自行添加，与普通命令行选项没有区别
+                "-g",//注意一定要加-g，否则无法调试
+                "-std=c++17",
+                "\"${fileDirname}/${fileBasenameNoExtension}.cpp\"",
+                "-o",
+                "\"${fileBasenameNoExtension}\""
+            ],
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+```
+
+如果想要更加深入了解，可以访问[官网](https://go.microsoft.com/fwlink/?LinkId=733558)。
+
+## part 4 运行/调试支持
+
+同样在``c_cpp_properties.json``所在的``.vscode``目录下新建``launch.json``，并将一下代码复制进去：
+
+```json
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${fileBasenameNoExtension}",//注意这个选项必须与task.json中编译出的位置相同（即-o后的那个路径）
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build with Clang"//注意这个选项必须与task.json中的label相同
+        }
+    ]
+}
+```
+
+如果想要更加深入了解，可以访问[官网](https://go.microsoft.com/fwlink/?linkid=830387)。
+
+## part 5 调试指南
+
+点行号左边添加断电，按F5调试，可以在弹出的终端中输入。（剩下的相信大家都会了吧）
+
+# 完结撒花！
