@@ -277,7 +277,7 @@ tags: [macOS, 教程, vscode, clang]
 
 写好一份代码后按快捷键``control+option+N``即可运行，注意必须要保存后的代码才有vscode的自动提示和自动补全。
 
-### [使用Sanitizer](./2022-8-25-OI%E4%B8%ADSanitizer%E7%9A%84%E7%94%A8%E9%80%94)（强烈推荐）
+### [使用Sanitizer](https://tofucurd.github.io/2022/08/25/OI中Sanitizer的用途/)（强烈推荐）
 
 # step 3.2 vscode内置调试版
 
