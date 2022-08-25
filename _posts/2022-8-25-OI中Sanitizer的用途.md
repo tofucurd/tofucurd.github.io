@@ -20,7 +20,7 @@ tags: [Windows, macOS, Linux, gcc, clang]
 
 # 使用说明
 
-Sanitizer是一种工具，内置于clang中，可以帮助查找内存泄漏，死循环，负下标/超下标，爆int等一系列可能导致RE的工具，具体而言有两个：AddressSanitizer和UndefinedBehaviorSanitizer。使用时直接在调用clang编译时添加``-g -fsanitize=address,undefined``即可。例如下面的一份代码：
+Sanitizer是一种工具，内置于gcc/clang中，可以帮助查找内存泄漏，死循环，负下标/超下标，爆int等一系列可能导致RE的工具，具体而言有两个：AddressSanitizer和UndefinedBehaviorSanitizer。使用时直接在调用clang编译时添加``-g -fsanitize=address,undefined``即可。例如下面的一份代码：
 
 ```cpp
 #include<bits/stdc++.h>
