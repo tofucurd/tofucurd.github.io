@@ -297,7 +297,7 @@ tags: [macOS, 教程, vscode, clang]
 
 ## part 3 编译支持
 
-在``c_cpp_properties.json``所在的``.vscode``目录下新建``task.json``，并将一下代码复制进去：
+在``c_cpp_properties.json``所在的``.vscode``目录下新建``task.json``，并将以下代码复制进去：
 
 ```json
 {
@@ -329,7 +329,7 @@ tags: [macOS, 教程, vscode, clang]
 
 ## part 4 运行/调试支持
 
-同样在``c_cpp_properties.json``所在的``.vscode``目录下新建``launch.json``，并将一下代码复制进去：
+同样在``c_cpp_properties.json``所在的``.vscode``目录下新建``launch.json``，并将以下代码复制进去：
 
 ```json
 {
