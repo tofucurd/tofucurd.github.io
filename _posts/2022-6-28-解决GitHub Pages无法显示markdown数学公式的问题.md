@@ -6,7 +6,7 @@ author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true
 mathjax: true
-tags: [Others]
+tags: [教程, GitHub Pages]
 ---
 
 如果你使用的是Jekyll（GitHub默认），那么可以在需要的markdown文档前面的YAML内添加``mathjax:true``。
