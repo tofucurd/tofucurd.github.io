@@ -268,7 +268,7 @@ tags: [macOS, 教程, vscode, clang]
 
 ```json
 //注意最后的逗号
-"cpp": "cd $dir && clang++ -Wl,-stack_size,0x10000000 -std=c++17 -Wall -Ofast \"$fileName\" -o \"$fileNameWithoutExt\" && \"$fileNameWithoutExt\"",
+"cpp": "cd $dir && clang++ -Wl,-stack_size,0x10000000 -std=c++17 -Wall -Ofast \"$fileName\" -o \"$fileNameWithoutExt\" && \"./$fileNameWithoutExt\"",
 ```
 
 保存即可。
