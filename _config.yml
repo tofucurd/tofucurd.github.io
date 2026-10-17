@@ -1,54 +1,21 @@
-# Site settings
-title: tofucurd Blog
-SEOTitle: 菜 | tofucurd Blog
-header-img: img/home-bg-1.jpg
+# Site
+title: Yile Liu
+author: Yile Liu
+description: "Compilers and low-level systems."
 email: liu_yi_le@icloud.com
-description: "太菜了啊啊啊啊啊啊啊"
-keyword: "菜，摆"
-url: "https://tofucurd.github.io"              # your host, for absolute URL
-baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
-# Publish posts or collection documents with a future date.
-future: true
+# URL
+url: "https://tofucurd.github.io"
+baseurl: ""
 
-# SNS settings
-RSS: false
-# weibo_username:     huxpro
-# zhihu_username:     huxpro
-github_username:    tofucurd
-# twitter_username:   huxpro
-#facebook_username:  huxpro
-#linkedin_username:  firstname-lastname-idxxxx
-
-
-
-# Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
-highlighter: rouge
+# Build
 permalink: pretty
-paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-# If you have timezone issue (e.g. #68) in China, uncomment to use this:
-#timezone: CN  
-
-
-
-# Gems
-# from PR#40, to support local preview for Jekyll 3.0
-# make sure you have this gem installed
-# `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
-
-
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
+future: true
 markdown: kramdown
+highlighter: rouge
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input: GFM
+  syntax_highlighter: rouge
   syntax_highlighter_opts:
     span:
       line_numbers: false
@@ -56,58 +23,22 @@ kramdown:
       line_numbers: true
       start_line: 1
 
+exclude:
+  - less
+  - node_modules
+  - Gruntfile.js
+  - package.json
+  - package-lock.json
+  - Rakefile
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - README.zh.md
+  - _doc
 
-
-# Disqus settings
-# disqus_username: hux
-
-# Netease settings
-netease_comment: false
-
-
-
-# Analytics settings
-# Baidu Analytics 
-# ba_track_id: [your track id]
-
-# Google Analytics
-# ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-# ga_domain: huangxuan.me
-
-
-
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "向大佬们问好"
-# sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
-
-# Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
-
-
-
-# Progressive Web Apps
-chrome-tab-theme-color: "#000000"
-service-worker: true
-
-
-
-# MathJax rendering for layout:page (e.g. post preview)
-page-mathjax: false
-
-
-
-# Friends
-friends: [
-    {
-        title: "kk19212",
-        href: "https://dreamerkk.blog.luogu.org"
-    },
-    {
-        title: "Tyyyyyy",
-        href: "https://www.luogu.com.cn/blog/leoltysite/"
-    }
-]
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      lang: zh

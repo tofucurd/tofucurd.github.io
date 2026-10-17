@@ -1,0 +1,27 @@
+---
+layout: default
+lang: zh
+alt: /archive/
+title: 归档
+---
+<h1>归档</h1>
+
+{% assign current_year = '' %}
+{% for post in site.posts %}
+  {% unless post.lang == 'en' %}
+  {% assign y = post.date | date: '%Y' %}
+  {% if y != current_year %}
+    {% unless forloop.first %}</ul>{% endunless %}
+    <h2>{{ y }}</h2>
+    <ul class="post-list">
+    {% assign current_year = y %}
+  {% endif %}
+  <li>
+    <a href="{{ post.url | relative_url }}">
+      <span class="t">{{ post.title }}</span>
+      <span class="d">{{ post.date | date: '%m-%d' }}</span>
+    </a>
+  </li>
+  {% if forloop.last %}</ul>{% endif %}
+  {% endunless %}
+{% endfor %}

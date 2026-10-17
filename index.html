@@ -1,39 +1,26 @@
 ---
-layout: page
-description: "菜"
+layout: default
+lang: en
+alt: /zh/
 ---
+<h1>{{ site.author }}</h1>
 
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">
-            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
+<p class="lede">Undergraduate in Electrical and Computer Engineering at the ZJU-UIUC Institute, working on compilers and low-level systems.</p>
+
+<p>From Fall 2027 I'll be on the Urbana-Champaign campus. Right now I'm building <a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a>, an out-of-tree LLVM pass that lowers IR down to LC-3 assembly. <a href="{{ '/about/' | relative_url }}">More about me →</a></p>
+
+<h2>Writing</h2>
+<ul class="post-list">
+{% for post in site.posts %}
+  {% unless post.lang == 'en' %}
+  {% assign pair = nil %}
+  {% if post.ref %}{% assign pair = site.posts | where: 'ref', post.ref | where: 'lang', 'en' | first %}{% endif %}
+  <li>
+    <a href="{% if pair %}{{ pair.url | relative_url }}{% else %}{{ post.url | relative_url }}{% endif %}">
+      <span class="t">{% if pair %}{{ pair.title }}{% else %}{{ post.title }}{% endif %}</span>
+      <span class="d">{{ post.date | date: '%Y-%m-%d' }}</span>
     </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-    </p>
-</div>
-<hr>
+  </li>
+  {% endunless %}
 {% endfor %}
-
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-    </li>
-    {% endif %}
 </ul>
-{% endif %}

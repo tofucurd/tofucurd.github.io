@@ -1,0 +1,22 @@
+---
+layout: page
+lang: zh
+alt: /about/
+title: 关于
+description: "编译器和底层系统。"
+---
+<p>我是 Yile Liu，<a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC 联合学院</a>电子与计算机工程本科生，现在在海宁。2027 年秋季到 Urbana-Champaign 校区。</p>
+
+<p>我的兴趣是编译器和底层系统——我喜欢那种输出必须真的能跑起来、而且“对不对”是可以量的题目。</p>
+
+<h2>工作</h2>
+
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> —— 一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。支持 <code>phi</code>、<code>select</code>、<code>switch</code>、<code>getelementptr</code>、变参调用，以及一个小 libc（<code>printf</code>、<code>scanf</code>、<code>sprintf</code>、<code>sscanf</code>）。测试共 35 个、分三层；其中 16 个会把生成的代码汇编后在 LC-3 模拟器上运行，比对 stdout。</p>
+
+<h2>更早</h2>
+
+<p>2019–2023 年做信息学竞赛（OI）。留下来的习惯是量常数因子，而不是相信渐进复杂度。</p>
+
+<h2>联系</h2>
+
+<p><a href="mailto:liu_yi_le@icloud.com">liu_yi_le@icloud.com</a> · <a href="https://github.com/tofucurd">GitHub</a></p>

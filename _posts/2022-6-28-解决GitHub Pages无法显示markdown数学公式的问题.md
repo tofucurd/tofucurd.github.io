@@ -2,6 +2,7 @@
 layout:     post
 title:      "解决GitHub Pages无法显示markdown数学公式的问题"
 date:       2022-6-28
+ref:         gh-pages-mathjax
 author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true

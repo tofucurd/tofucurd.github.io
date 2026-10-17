@@ -1,47 +1,22 @@
 ---
 layout: page
-title: "About"
-description: "向大佬们问好"
-header-img: "img/about-bg.jpg"
-multilingual: true
+title: About
+description: "Compilers and low-level systems."
+lang: en
+alt: /zh/about/
 ---
+<p>I'm Yile Liu, an undergraduate in Electrical and Computer Engineering at the <a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC Institute</a>, currently in Haining, China. From Fall 2027 I'll be on the Urbana-Champaign campus.</p>
 
-{% include multilingual-sel.html %}
+<p>My interests are compilers and low-level systems — I like problems where the output has to actually run, and where "it works" is something you can measure.</p>
 
-<!-- Chinese Version -->
-<div class="zh post-container">
-    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
-    {{ about_zh | markdownify }}
-</div>
+<h2>Work</h2>
 
-<!-- English Version -->
-<div class="en post-container">
-    {% capture about_en %}{% include about/en.md %}{% endcapture %}
-    {{ about_en | markdownify }}
-</div>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers LLVM IR generated from C down to LC-3 assembly, a 16-bit ISA with eight registers. It covers <code>phi</code>, <code>select</code>, <code>switch</code>, <code>getelementptr</code>, variadic calls, and a small libc (<code>printf</code>, <code>scanf</code>, <code>sprintf</code>, <code>sscanf</code>). It is tested by 35 cases in three tiers; 16 of them assemble the generated code and run it on an LC-3 simulator, comparing stdout against expected output.</p>
 
+<h2>Before that</h2>
 
-{% if site.disqus_username %}
-<!-- disqus 评论框 start -->
-<div class="comment">
-    <div id="disqus_thread" class="disqus-thread">
+<p>Competitive programming (Chinese OI), 2019–2023. The habit I kept from it is measuring constant factors instead of trusting asymptotics.</p>
 
-    </div>
-</div>
-<!-- disqus 评论框 end -->
+<h2>Contact</h2>
 
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-{% endif %}
+<p><a href="mailto:liu_yi_le@icloud.com">liu_yi_le@icloud.com</a> · <a href="https://github.com/tofucurd">GitHub</a></p>

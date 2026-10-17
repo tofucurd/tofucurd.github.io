@@ -1,0 +1,24 @@
+---
+layout: default
+lang: zh
+alt: /
+---
+<h1>{{ site.author }}</h1>
+
+<p class="lede">浙江大学—伊利诺伊大学厄巴纳-香槟分校联合学院（ZJUI）电子与计算机工程本科生，方向是编译器和底层系统。</p>
+
+<p>2027 年秋季到 Urbana-Champaign 校区。目前在做 <a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a>——一个把 LLVM IR 降到 LC-3 汇编的 out-of-tree pass。<a href="{{ '/zh/about/' | relative_url }}">更多 →</a></p>
+
+<h2>文章</h2>
+<ul class="post-list">
+{% for post in site.posts %}
+  {% unless post.lang == 'en' %}
+  <li>
+    <a href="{{ post.url | relative_url }}">
+      <span class="t">{{ post.title }}</span>
+      <span class="d">{{ post.date | date: '%Y-%m-%d' }}</span>
+    </a>
+  </li>
+  {% endunless %}
+{% endfor %}
+</ul>

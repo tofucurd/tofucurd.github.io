@@ -3,6 +3,7 @@ layout:     post
 title:      "RHEL中yum无法启用repo的解决方案"
 subtitle:   "白嫖系统"
 date:       2022-2-19
+ref:         rhel-yum
 author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true

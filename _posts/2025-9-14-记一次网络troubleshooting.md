@@ -3,6 +3,7 @@ layout:     post
 title:      "记一次网络troubleshooting"
 subtitle:   "有被自己糖到"
 date:       2025-9-14
+ref:         network-troubleshooting
 author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true

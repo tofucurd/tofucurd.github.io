@@ -3,6 +3,7 @@ layout:     post
 title:      "OI中macOS下的vscode配置笔记"
 subtitle:   "专为OI配置"
 date:       2022-8-25
+ref:         vscode-macos
 author:     "tofucurd"
 header-img: "img/post-bg-1.jpg"
 catalog: true
