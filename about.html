@@ -5,18 +5,22 @@ description: "Compilers and low-level systems."
 lang: en
 alt: /zh/about/
 ---
-<p>I'm Yile Liu, an undergraduate in Electrical and Computer Engineering at the <a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC Institute</a>, currently in Haining, China. From Fall 2027 I'll be on the Urbana-Champaign campus.</p>
+<p>I'm Yile Liu, an undergraduate in Electrical and Computer Engineering at the <a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC Institute</a>, currently in Haining, China. I'll be on the Urbana-Champaign campus from Fall 2027, and I expect to graduate in 2029.</p>
 
 <p>My interests are compilers and low-level systems — I like problems where the output has to actually run, and where "it works" is something you can measure.</p>
 
 <h2>Work</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers LLVM IR generated from C down to LC-3 assembly, a 16-bit ISA with eight registers. It covers <code>phi</code>, <code>select</code>, <code>switch</code>, <code>getelementptr</code>, variadic calls, and a small libc (<code>printf</code>, <code>scanf</code>, <code>sprintf</code>, <code>sscanf</code>). It is tested by 35 cases in three tiers; 16 of them assemble the generated code and run it on an LC-3 simulator, comparing stdout against expected output.</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers LLVM IR generated from C down to LC-3 assembly: a 16-bit ISA with eight registers.</p>
+
+<p>Four of those registers are pinned by the calling convention (globals base, frame pointer, stack pointer, return address), which leaves three for computation — so spilling is not an afterthought, it is the design. The return-address register doubles as the phi predecessor selector, which removes the need for edge splitting; and the six-bit immediate offset of <code>LDR</code>/<code>STR</code> caps a function at 32 locals, a limit that propagated backwards into the frame layout and then into the calling convention itself.</p>
+
+<p>It covers <code>phi</code>, <code>select</code>, <code>switch</code>, <code>getelementptr</code>, variadic calls, and a small libc (<code>printf</code>, <code>scanf</code>, <code>sprintf</code>, <code>sscanf</code>). It is tested by 35 cases in three tiers; 16 of them assemble the generated code and run it on an LC-3 simulator, comparing stdout against expected output.</p>
 
 <h2>Before that</h2>
 
-<p>Competitive programming (Chinese OI), 2019–2023. The habit I kept from it is measuring constant factors instead of trusting asymptotics.</p>
+<p>Competitive programming (Chinese OI), 2019–2023: second prize at NOIP 2023, third prize at NOIP 2022, and a Certificate of Distinction at the Canadian Computing Competition (Senior) in 2023. The habit I kept from it is measuring constant factors instead of trusting asymptotics.</p>
 
 <h2>Contact</h2>
 
-<p><a href="mailto:liu_yi_le@icloud.com">liu_yi_le@icloud.com</a> · <a href="https://github.com/tofucurd">GitHub</a></p>
+<p><a href="mailto:yilel3@illinois.edu">yilel3@illinois.edu</a> · <a href="https://github.com/tofucurd">github.com/tofucurd</a></p>

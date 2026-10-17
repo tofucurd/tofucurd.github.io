@@ -5,18 +5,22 @@ alt: /about/
 title: 关于
 description: "编译器和底层系统。"
 ---
-<p>我是 Yile Liu，<a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC 联合学院</a>电子与计算机工程本科生，现在在海宁。2027 年秋季到 Urbana-Champaign 校区。</p>
+<p>我是 Yile Liu，<a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC 联合学院</a>电子与计算机工程本科生，现在在海宁。2027 年秋季到 Urbana-Champaign 校区，预计 2029 年毕业。</p>
 
 <p>我的兴趣是编译器和底层系统——我喜欢那种输出必须真的能跑起来、而且“对不对”是可以量的题目。</p>
 
 <h2>工作</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> —— 一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。支持 <code>phi</code>、<code>select</code>、<code>switch</code>、<code>getelementptr</code>、变参调用，以及一个小 libc（<code>printf</code>、<code>scanf</code>、<code>sprintf</code>、<code>sscanf</code>）。测试共 35 个、分三层；其中 16 个会把生成的代码汇编后在 LC-3 模拟器上运行，比对 stdout。</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> —— 一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。</p>
+
+<p>其中四个寄存器被调用约定钉死（全局基址、帧指针、栈指针、返回地址），只剩三个能做计算——所以溢出不是补丁，是设计的起点。返回地址寄存器同时兼任 phi 的 predecessor selector，因此不需要做 edge splitting；而 <code>LDR</code>/<code>STR</code> 的六位立即数偏移把单个函数的局部变量压到 32 个以内，这个限制又反过来决定了栈帧布局，最后传导到了调用约定本身。</p>
+
+<p>支持 <code>phi</code>、<code>select</code>、<code>switch</code>、<code>getelementptr</code>、变参调用，以及一个小 libc（<code>printf</code>、<code>scanf</code>、<code>sprintf</code>、<code>sscanf</code>）。测试共 35 个、分三层；其中 16 个会把生成的代码汇编后在 LC-3 模拟器上运行，比对 stdout。</p>
 
 <h2>更早</h2>
 
-<p>2019–2023 年做信息学竞赛（OI）。留下来的习惯是量常数因子，而不是相信渐进复杂度。</p>
+<p>2019–2023 年做信息学竞赛（OI）：NOIP 2023 二等奖、NOIP 2022 三等奖、2023 年加拿大计算机竞赛（Senior）Distinction。留下来的习惯是量常数因子，而不是相信渐进复杂度。</p>
 
 <h2>联系</h2>
 
-<p><a href="mailto:liu_yi_le@icloud.com">liu_yi_le@icloud.com</a> · <a href="https://github.com/tofucurd">GitHub</a></p>
+<p><a href="mailto:yilel3@illinois.edu">yilel3@illinois.edu</a> · <a href="https://github.com/tofucurd">github.com/tofucurd</a></p>
