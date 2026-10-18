@@ -11,11 +11,11 @@ alt: /zh/about/
 
 <h2>Work</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers LLVM IR generated from C down to LC-3 assembly: a 16-bit ISA with eight registers.</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers a subset of LLVM IR generated from C down to LC-3 assembly: a 16-bit ISA with eight registers.</p>
 
-<p>Four of those registers are pinned by the calling convention (globals base, frame pointer, stack pointer, return address), which leaves three for computation — so spilling is not an afterthought, it is the design. The return-address register doubles as the phi predecessor selector, which removes the need for edge splitting; and the six-bit immediate offset of <code>LDR</code>/<code>STR</code> caps a function at 32 locals, a limit that propagated backwards into the frame layout and then into the calling convention itself.</p>
+<p>LC-3 has no multiply and no divide instruction, so <code>mul</code>, <code>udiv</code> and <code>urem</code> are synthesized from addition and shifts. The calling convention started out passing arguments in registers; when that ran out of registers I rewrote it as a stack frame matching the LC-3 C runtime protocol used in the course.</p>
 
-<p>It covers <code>phi</code>, <code>select</code>, <code>switch</code>, <code>getelementptr</code>, variadic calls, and a small libc (<code>printf</code>, <code>scanf</code>, <code>sprintf</code>, <code>sscanf</code>). It is tested by 35 cases in three tiers; 16 of them assemble the generated code and run it on an LC-3 simulator, comparing stdout against expected output.</p>
+<p>The deliberate simplification is that every virtual register gets its own stack slot — a load and a store around every operation, and no register allocation at all. That is where the next version starts, not something I overlooked.</p>
 
 <h2>Before that</h2>
 
