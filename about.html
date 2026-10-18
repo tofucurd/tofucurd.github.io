@@ -11,11 +11,9 @@ alt: /zh/about/
 
 <h2>Work</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers a subset of LLVM IR generated from C down to LC-3 assembly: a 16-bit ISA with eight registers.</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers a subset of LLVM IR generated from C to LC-3 assembly: a 16-bit ISA with eight registers.</p>
 
-<p>LC-3 has no multiply and no divide instruction, so <code>mul</code>, <code>udiv</code> and <code>urem</code> are synthesized from addition and shifts. The calling convention started out passing arguments in registers; when that ran out of registers I rewrote it as a stack frame matching the LC-3 C runtime protocol used in the course.</p>
-
-<p>The deliberate simplification is that every virtual register gets its own stack slot — a load and a store around every operation, and no register allocation at all. That is where the next version starts, not something I overlooked.</p>
+<p>It supports <code>add</code>, <code>and</code>, <code>shl</code>, <code>mul</code>, <code>alloca</code>, <code>store</code>, <code>br</code>, <code>load</code>, <code>icmp</code>, <code>phi</code>, <code>select</code>, <code>call</code>, <code>udiv</code>, <code>urem</code>, <code>lshr</code> and <code>switch</code>. R6 is the stack pointer, R5 the frame pointer, R7 holds the return address. Every virtual register gets a stack slot, unsigned values are treated as signed, and there is no floating-point support.</p>
 
 <h2>Before that</h2>
 

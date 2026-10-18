@@ -13,9 +13,7 @@ description: "编译器和底层系统。"
 
 <p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> —— 一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 的一个子集降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。</p>
 
-<p>LC-3 既没有乘法也没有除法指令，所以 <code>mul</code>、<code>udiv</code>、<code>urem</code> 都是用加法和移位拼出来的。调用约定一开始是寄存器传参，后来寄存器不够用，改成了栈帧，对齐课上讲的 LC-3 C 运行时协议。</p>
-
-<p>一个刻意的简化：每个虚拟寄存器都单独占一个栈槽——每条指令前后各一次 load/store，完全没有寄存器分配。这是下一版的起点，不是没想到。</p>
+<p>支持 <code>add</code>、<code>and</code>、<code>shl</code>、<code>mul</code>、<code>alloca</code>、<code>store</code>、<code>br</code>、<code>load</code>、<code>icmp</code>、<code>phi</code>、<code>select</code>、<code>call</code>、<code>udiv</code>、<code>urem</code>、<code>lshr</code>、<code>switch</code>。R6 作栈指针，R5 作帧指针，R7 存返回地址。每个虚拟寄存器占一个栈槽，无符号数按有符号处理，不支持浮点。</p>
 
 <h2>更早</h2>
 
