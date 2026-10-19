@@ -13,7 +13,7 @@ published: true
 
 Project: <https://github.com/tofucurd/LLVMIRToLC3Pass>
 
-Something I wrote in my first semester: a compiler from C to LC-3, a 16-bit teaching ISA with eight registers whose ALU does only AND, ADD and NOT. It started as the assembly assignments for ECE 220; afterwards I used it to do all the assembly MPs.
+Something I wrote in my second semester: a compiler from C to LC-3, a 16-bit teaching ISA with eight registers whose ALU does only AND, ADD and NOT. It started as the assembly assignments for ECE 220; afterwards I used it to do all the assembly MPs.
 
 ## Why a pass, not a backend
 
