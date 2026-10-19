@@ -13,7 +13,7 @@ published: true
 
 项目地址：<https://github.com/tofucurd/LLVMIRToLC3Pass>
 
-大二上写的一个东西：把 C 编译到 LC-3，一门只有八个寄存器、ALU 只有 AND/ADD/NOT 的 16 位教学指令集。起因是 ECE 220 的 Assembly 作业，写完之后用它跑完了全部Assembly MP。
+大一上写的一个东西：把 C 编译到 LC-3，一门只有八个寄存器、ALU 只有 AND/ADD/NOT 的 16 位教学指令集。起因是 ECE 220 的 Assembly 作业，写完之后用它跑完了全部Assembly MP。
 
 ## 为什么是 Pass，而不是 Backend
 
