@@ -17,7 +17,7 @@ Something I wrote in my second semester: a compiler from C to LC-3, a 16-bit tea
 
 ## Why a pass, not a backend
 
-The LLVM backend framework is fairly involved. TableGen takes some of the weight off, but the bar is still high. And an educational architecture like LC-3 is severely constrained — it can never really be full C compatible: it is purely 16-bit and word-addressed rather than byte-addressed, it has no arithmetic wider than 16 bits, an ALU that only does AND, ADD and NOT, load/store register offsets limited to [-16, 15], and branches that reach at most 1024 addresses. LC-3 was never going to carry a program of any real size, so using an LLVM pass to translate LLVM IR was the most reasonable and most convenient option.
+The LLVM backend framework is fairly involved. TableGen takes some of the weight off, but the bar is still high. And an educational architecture like LC-3 is severely constrained — it can never really be full C compatible: it is purely 16-bit and word-addressed rather than byte-addressed, it has no arithmetic wider than 16 bits, an ALU that only does AND, ADD and NOT, load/store register offsets limited to [-32, 31], branches that reach no further than ±256 words, and subroutine calls limited to ±1024 words. LC-3 was never going to carry a program of any real size, so using an LLVM pass to translate LLVM IR was the most reasonable and most convenient option.
 
 ## The LC-3 calling convention
 
@@ -134,7 +134,7 @@ To make I/O possible from C, a small set of I/O APIs is built in: at each CallIn
 
 ### 6. Function calls
 
-Function calls follow the calling convention from ECE 220 exactly, jumping with JSR, so the offset is limited to ±1024 words. See the source for the implementation.
+Function calls follow the calling convention from ECE 220 exactly, jumping with JSR, so PCoffset11 is limited to −1024..1023 words. See the source for the implementation.
 
 ## Performance against mp11's tiny compiler
 
@@ -150,8 +150,8 @@ The numbers below are **dynamically executed** machine instructions, from entry 
 
 ## Limitations of this pass
 
-- At most 32 frame slots. `LDR`/`STR` take a 6-bit signed immediate offset (-16..15) and the frame pointer is fixed at R5, so a function can have at most 32 slots.
-- Calls are range-limited: `JSR` uses an 11-bit offset, i.e. ±1024 words.
+- At most 32 frame slots. `LDR`/`STR` take a 6-bit signed offset6 (-32..31), and locals live below R5, so a function can have at most 32 slots.
+- Calls are range-limited: `JSR` uses PCoffset11, i.e. −1024..1023 words.
 - No floating point; unsigned values are treated as signed.
 - A number of instructions are still not implemented.
 

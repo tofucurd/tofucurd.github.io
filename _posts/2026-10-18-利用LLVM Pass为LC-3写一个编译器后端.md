@@ -17,7 +17,7 @@ published: true
 
 ## 为什么是 Pass，而不是 Backend
 
-LLVM Backend 框架比较复杂，虽然已经有像 TableGen 这种尝试减轻难度的部分，但是依旧门槛比较高。而对于 LC-3 这种 educational 的架构，局限性比较大，甚至不可能真正做到 full C compatible，比如纯 16 位系统，不支持按字节寻址，不支持除 16 位外的计算，ALU 只支持 AND、ADD、NOT，load/store register offset 只能支持到 [-16, 15]，跳转最多 1024 个地址等等原因。所以，LC-3 注定无法承担稍微大一点的程序，因此使用 LLVM Pass 翻译 LLVM IR 成了最合理也最方便的选择。
+LLVM Backend 框架比较复杂，虽然已经有像 TableGen 这种尝试减轻难度的部分，但是依旧门槛比较高。而对于 LC-3 这种 educational 的架构，局限性比较大，甚至不可能真正做到 full C compatible，比如纯 16 位系统，不支持按字节寻址，不支持除 16 位外的计算，ALU 只支持 AND、ADD、NOT，load/store register offset 只能支持到 [-32, 31]，普通分支只能跳到 ±256 个字以内，子程序调用也只有 ±1024 个字等等原因。所以，LC-3 注定无法承担稍微大一点的程序，因此使用 LLVM Pass 翻译 LLVM IR 成了最合理也最方便的选择。
 
 ## LC-3 Calling Convention
 
@@ -134,7 +134,7 @@ std::string getIndex(BasicBlock *BB, DenseMap<Value *, std::string> &Map,
 
 ### 6. Function Call
 
-Function Call 流程严格遵照 ECE 220 课上讲的 Calling Convention 实现，使用 JSR 进行跳转，因此 offset 的范围是 ±1024 个字，具体实现可以参考源代码。
+Function Call 流程严格遵照 ECE 220 课上讲的 Calling Convention 实现，使用 JSR 进行跳转，因此 PCoffset11 的范围是 −1024..1023 个字，具体实现可以参考源代码。
 
 ## 与 MP11 的 tiny compiler 进行性能对比
 
@@ -150,8 +150,8 @@ Function Call 流程严格遵照 ECE 220 课上讲的 Calling Convention 实现�
 
 ## 这个 Pass 的局限
 
-- 帧槽上限 32 个。`LDR`/`STR` 的偏移是 6 位有符号立即数（−16..15），帧指针固定在 R5，所以一个函数最多 32 个槽。
-- 函数调用不能太远，因为 `JSR` 跳转最多 ±1024 个字。
+- 帧槽上限 32 个。`LDR`/`STR` 的 offset6 是 6 位有符号立即数（−32..31），局部变量都在 R5 下方，所以一个函数最多 32 个槽。
+- 函数调用不能太远：`JSR` 的 PCoffset11 是 −1024..1023 个字。
 - 不支持浮点；无符号数按有符号处理。
 - 仍然有一些命令没有实现。
 
