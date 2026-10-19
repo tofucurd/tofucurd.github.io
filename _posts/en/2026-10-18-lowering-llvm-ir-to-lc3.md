@@ -17,7 +17,7 @@ Something I wrote in my second semester: a compiler from C to LC-3, a 16-bit tea
 
 ## Why a pass, not a backend
 
-The LLVM backend framework is fairly involved. TableGen takes some of the weight off, but the bar is still high. And an educational architecture like LC-3 is severely constrained — it can never really be full C compatible: it is purely 16-bit and word-addressed rather than byte-addressed, it has no arithmetic wider than 16 bits, an ALU that only does AND, ADD and NOT, load/store register offsets limited to [-16, 15], and branches that reach at most 1024 addresses. LC-3 was never going to carry a program of any real size, so translating LLVM IR directly was the most reasonable and most convenient option.
+The LLVM backend framework is fairly involved. TableGen takes some of the weight off, but the bar is still high. And an educational architecture like LC-3 is severely constrained — it can never really be full C compatible: it is purely 16-bit and word-addressed rather than byte-addressed, it has no arithmetic wider than 16 bits, an ALU that only does AND, ADD and NOT, load/store register offsets limited to [-16, 15], and branches that reach at most 1024 addresses. LC-3 was never going to carry a program of any real size, so using an LLVM pass to translate LLVM IR was the most reasonable and most convenient option.
 
 ## The LC-3 calling convention
 

@@ -17,7 +17,7 @@ published: true
 
 ## 为什么是 Pass，而不是 Backend
 
-LLVM Backend 框架比较复杂，虽然已经有像 TableGen 这种尝试减轻难度的部分，但是依旧门槛比较高。而对于 LC-3 这种 educational 的架构，局限性比较大，甚至不可能真正做到 full C compatible，比如纯 16 位系统，不支持按位寻址，不支持除 16 位外的计算，ALU 只支持 AND、ADD、NOT，load/store register offset 只能支持到 [-16, 15]，跳转最多 1024 个地址等等原因。所以，LC-3 注定无法承担稍微大一点的程序，因此直接使用翻译 LLVM IR 成了最合理也最方便的选择。
+LLVM Backend 框架比较复杂，虽然已经有像 TableGen 这种尝试减轻难度的部分，但是依旧门槛比较高。而对于 LC-3 这种 educational 的架构，局限性比较大，甚至不可能真正做到 full C compatible，比如纯 16 位系统，不支持按位寻址，不支持除 16 位外的计算，ALU 只支持 AND、ADD、NOT，load/store register offset 只能支持到 [-16, 15]，跳转最多 1024 个地址等等原因。所以，LC-3 注定无法承担稍微大一点的程序，因此使用 LLVM Pass 翻译 LLVM IR 成了最合理也最方便的选择。
 
 ## LC-3 Calling Convention
 
