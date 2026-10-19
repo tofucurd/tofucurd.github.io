@@ -13,7 +13,7 @@ published: true
 
 项目地址：<https://github.com/tofucurd/LLVMIRToLC3Pass>
 
-大一下写的一个东西：把 C 编译到 LC-3，一门只有八个寄存器、ALU 只有 AND/ADD/NOT 的 16 位教学指令集。起因是 ECE 220 的 Assembly 作业，写完之后用它跑完了全部Assembly MP。
+大一下写的一个东西：把 C 编译到 LC-3，一门只有八个寄存器、ALU 只有 AND/ADD/NOT 的 16 位教学指令集。起因是 ECE 220 的 Assembly 作业，写完之后用它跑完了全部 Assembly MP。
 
 ## 为什么是 Pass，而不是 Backend
 
@@ -21,19 +21,19 @@ LLVM Backend 框架比较复杂，虽然已经有像 TableGen 这种尝试减轻
 
 ## LC-3 Calling Convention
 
-为了方便统一和便于理解，LC-3 使用纯栈传递参数和返回值，R5 为 fp，R6 为 sp，且栈由高位（最高 0xFE00）向低位生长，R7 为 return address，均为 Callee saved。由于 LC-3 仅支持 16 位数据，因此并无 BE 和 LE 的区别，stack frame 如下图所示（Watt 为 Caller，Volt 为 Callee）：
+为了统一和便于理解，LC-3 使用纯栈传递参数和返回值，R5 为 fp，R6 为 sp，且栈由高位（最高 0xFE00）向低位生长，R7 为 return address，均为 Callee saved。由于 LC-3 仅支持 16 位数据，因此并无 BE 和 LE 的区别，stack frame 如下图所示（Watt 为 Caller，Volt 为 Callee）：
 
 ![fig.1](https://tofucurd.github.io/img/post-2026-10-18-1.png "Markdown")
 
 ## 总体思路
 
-首先，LC-3 不能支持太大体量的程序，ABI 也只有字符串的输入输出，因此通常只会有一个 LLVM IR Module。因此 `LLVMIRToLC3Pass::run()` 就以 Module 为参数，以 Block 为子单元进行翻译，不区分 pointer 和 variable 的区别，所有 virtual register 都当做 local variable 存在栈里。由于只是一个 LLVM Pass，因此需要手动使用 `ToolOutputFile` 和 `raw_string_ostream` 进行输出。主要流程是先对 LLVM IR 进行一些预处理，使之更加适合后续的逐命令翻译，然后逐命令将 LLVM IR 翻译成 LC-3 Assembly，这当中对一些特殊的情况需要额外处理。
+首先，LC-3 不能支持太大体量的程序，ABI 也只有字符串的输入输出，因此通常只会有一个 LLVM IR Module。因此 `LLVMIRToLC3Pass::run()` 就以 Module 为参数，以 Block 为子单元进行翻译，不区分 pointer 和 variable，所有 virtual register 都当做 local variable 存在栈里。由于只是一个 LLVM Pass，因此需要手动使用 `ToolOutputFile` 和 `raw_string_ostream` 进行输出。主要流程是先对 LLVM IR 进行一些预处理，使之更加适合后续的逐命令翻译，然后逐命令将 LLVM IR 翻译成 LC-3 Assembly，这当中对一些特殊的情况需要额外处理。
 
 ## 技术特点
 
 ### 1. 实现 PHI Node 分支控制流 —— 主要技术难点
 
-PHI node 是 LLVM IR 中重要的分支控制系统，一定位于一个 Block 的第一个命令。与 Block 搭配使用，PHI 可以高效进行复杂的分支跳转和管理。主要难点是，PHI 需要判断当前是由哪一个 Block 跳转而来的。为了解决这个问题，可以创新性地利用 R7 寄存器：在每一个 Block 末尾要 Branch 时，利用 LC-3 的 `LEA` 指令加载当前 Block 的 LABEL 地址到 R7 里，于是跳转后 PHI 便可以立即从 R7 里获知是从哪里跳转而来的。由于 R7 的两个用途生命周期不会重叠，所以这样不会有冲突的风险。
+PHI node 是 LLVM IR 中重要的分支控制机制，一定位于一个 Block 的第一个命令。与 Block 搭配使用，PHI 可以高效进行复杂的分支跳转和管理。主要难点是，PHI 需要判断当前是由哪一个 Block 跳转而来的。为了解决这个问题，可以创新性地利用 R7 寄存器：在每一个 Block 末尾要 Branch 时，利用 LC-3 的 `LEA` 指令加载当前 Block 的 LABEL 地址到 R7 里，于是跳转后 PHI 便可以立即从 R7 里获知是从哪里跳转而来的。由于 R7 的两个用途生命周期不会重叠，所以这样不会有冲突的风险。
 
 在 Branch 时利用 `LEA` 把信息保存在 R7 里：
 
@@ -136,9 +136,9 @@ std::string getIndex(BasicBlock *BB, DenseMap<Value *, std::string> &Map,
 
 Function Call 流程严格遵照 ECE 220 课上讲的 Calling Convention 实现，使用 JSR 进行跳转，因此 offset 的范围是 ±1024 个字，具体实现可以参考源代码。
 
-## 与MP11的tiny compiler进行性能对比
+## 与 MP11 的 tiny compiler 进行性能对比
 
-从 `main` 入口到返回之间**实际执行的**机器指令数，包含栈帧操作、`RET` 和被调用的库代码，不含启动与返回后的打印。所有成功项都在 LC-3 模拟器上逐条执行，并重放了 PC 与机器码轨迹、核对了返回值。mp11 没有优化开关，pass则使用 `clang -O0` 生成的 IR，避免把 clang 的优化算进 lowering 的质量里。
+从 `main` 入口到返回之间**实际执行的**机器指令数，包含栈帧操作、`RET` 和被调用的库代码，不含启动与返回后的打印。所有成功项都在 LC-3 模拟器上逐条执行，并重放了 PC 与机器码轨迹、核对了返回值。mp11 没有优化开关，pass 则使用 `clang -O0` 生成的 IR，避免把 clang 的优化算进 lowering 的质量里。
 
 | 测试 | mp11 | 本 pass | 减少 |
 | :-- | ---: | ---: | ---: |
@@ -148,11 +148,10 @@ Function Call 流程严格遵照 ECE 220 课上讲的 Calling Convention 实现�
 | 布尔分支与标量递推 | 48,854 | 26,316 | 46.1% |
 | **合计** | **154,295** | **100,253** | **35.0%** |
 
-
-## 这个Pass的局限
+## 这个 Pass 的局限
 
 - 帧槽上限 32 个。`LDR`/`STR` 的偏移是 6 位有符号立即数（−16..15），帧指针固定在 R5，所以一个函数最多 32 个槽。
-- 函数调用不能太远，因为 ``JSR`` 跳转最多 ±1024 个地址。
+- 函数调用不能太远，因为 `JSR` 跳转最多 ±1024 个字。
 - 不支持浮点；无符号数按有符号处理。
 - 仍然有一些命令没有实现。
 
