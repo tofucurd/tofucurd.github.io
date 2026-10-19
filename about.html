@@ -7,11 +7,11 @@ alt: /zh/about/
 ---
 <p>I'm Yile Liu, an undergraduate in Electrical and Computer Engineering at the <a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC Institute</a>, currently in Haining, China. I'll be on the Urbana-Champaign campus from Fall 2027, and I expect to graduate in 2029.</p>
 
-<p>My interests are compilers and low-level systems — I like problems where the output has to actually run, and where "it works" is something you can measure.</p>
+<p>My interests are compilers, low-level systems, and LLM/Agents.</p>
 
 <h2>Work</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> — an out-of-tree LLVM pass, written in C++, that lowers a subset of LLVM IR generated from C to LC-3 assembly: a 16-bit ISA with eight registers.</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> is an out-of-tree LLVM pass, written in C++, that lowers a subset of LLVM IR generated from C to LC-3 assembly: a 16-bit ISA with eight registers.</p>
 
 <p>It supports <code>add</code>, <code>and</code>, <code>shl</code>, <code>mul</code>, <code>alloca</code>, <code>store</code>, <code>br</code>, <code>load</code>, <code>icmp</code>, <code>phi</code>, <code>select</code>, <code>call</code>, <code>udiv</code>, <code>urem</code>, <code>lshr</code> and <code>switch</code>. R6 is the stack pointer, R5 the frame pointer, R7 holds the return address. Every virtual register gets a stack slot, unsigned values are treated as signed, and there is no floating-point support.</p>
 

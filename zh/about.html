@@ -7,11 +7,11 @@ description: "编译器和底层系统。"
 ---
 <p>我是 Yile Liu，<a href="https://zjui.intl.zju.edu.cn/">ZJU-UIUC 联合学院</a>电子与计算机工程本科生，现在在海宁。2027 年秋季到 Urbana-Champaign 校区，预计 2029 年毕业。</p>
 
-<p>我的兴趣是编译器和底层系统——我喜欢那种输出必须真的能跑起来、而且“对不对”是可以量的题目。</p>
+<p>我的兴趣是编译器和底层系统，以及 LLM/Agents。</p>
 
 <h2>工作</h2>
 
-<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> —— 一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 的一个子集降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。</p>
+<p><strong><a href="https://github.com/tofucurd/LLVMIRToLC3Pass">LLVMIRToLC3Pass</a></strong> 是一个用 C++ 写的 out-of-tree LLVM pass，把 C 生成的 LLVM IR 的一个子集降到 LC-3 汇编：一种只有八个寄存器的 16 位指令集。</p>
 
 <p>支持 <code>add</code>、<code>and</code>、<code>shl</code>、<code>mul</code>、<code>alloca</code>、<code>store</code>、<code>br</code>、<code>load</code>、<code>icmp</code>、<code>phi</code>、<code>select</code>、<code>call</code>、<code>udiv</code>、<code>urem</code>、<code>lshr</code>、<code>switch</code>。R6 作栈指针，R5 作帧指针，R7 存返回地址。每个虚拟寄存器占一个栈槽，无符号数按有符号处理，不支持浮点。</p>
 
