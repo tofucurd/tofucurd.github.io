@@ -2,7 +2,7 @@ I am an undergraduate in Electrical and Computer Engineering at the
 [ZJU-UIUC Institute](https://zjui.intl.zju.edu.cn/), currently in Haining, China.
 I will be on the Urbana-Champaign campus from Fall 2027.
 
-My interests are compilers and low-level systems — I like problems where the output
+My interests are compilers and operating systems — I like problems where the output
 has to actually run, and where "it works" is something you can measure.
 
 ## What I have built
